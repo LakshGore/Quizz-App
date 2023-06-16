@@ -1,0 +1,22 @@
+<div style="margin-top: 100px;">
+  <form [formGroup]="quizForm">
+    <!-- <div *ngFor="let option of options; let i = index">
+      <label>
+        <input type="radio" formControlName="selectedOption" [value]="option" (change)="onOptionSelected()">
+        {{ option }}
+      </label>
+      <div *ngIf="quizForm.get('selectedOption')?.value === option">
+        <div *ngIf="option === correctAnswer">Correct!</div>
+        <div *ngIf="option !== correctAnswer">Sorry, that's incorrect.</div>
+      </div>
+    </div> -->
+    <div *ngFor="let option of options; let i = index">
+      <h2> Enter name: 
+      <input type="text" formControlName="selectedOption" (keyup)="onOptionSelected(i)"/>
+      <span *ngIf="validArr[i]">
+          this is invalid
+      </span>
+    </h2>
+    </div>
+  </form>
+</div>

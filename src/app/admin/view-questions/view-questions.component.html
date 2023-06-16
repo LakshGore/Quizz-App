@@ -1,0 +1,53 @@
+<div class="displayQuestions">
+  <div class="headerQuestion">
+    <p-panel>
+      <button
+        pButton
+        pRipple
+        type="button"
+        label="Add Question"
+        class="p-button-raised p-button-secondary"
+        routerLink="/questionSet"
+      ></button
+      ><button
+        pButton
+        pRipple
+        type="button"
+        label="Saved Quizzes"
+        class="p-button-raised p-button-secondary"
+        routerLink="/savedQuiz"
+      ></button>
+    </p-panel>
+  </div>
+  <div class="divTable">
+    <p-card>
+      <p-table [value]="arrAllQuestions" responsiveLayout="scroll">
+        <ng-template pTemplate="header">
+          <tr>
+            <!-- <th>Select</th> -->
+            <th>Quiz Type</th>
+            <th>Question Type</th>
+            <th>Question</th>
+            <th>Answer</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-question>
+          <tr>
+            <!-- <td>
+              <p-checkbox
+                [(ngModel)]="question.checkedQuestion"
+                name="question"
+                value="question{{ question }}"
+                (click)="checkBox(question)"
+              ></p-checkbox>
+            </td> -->
+            <td>{{ question.selectedQuiz }}</td>
+            <td>{{ question.questionType }}</td>
+            <td>{{ question.questionText }}</td>
+            <td>{{ question.answerText }} {{question.answerRadio}}</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </p-card>
+  </div>
+</div>

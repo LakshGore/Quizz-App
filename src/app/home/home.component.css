@@ -1,0 +1,12 @@
+:host ::ng-deep .p-card{
+    width: 50%;
+    margin-left: 25%;
+    text-align: center;
+}
+.titleWelcome{
+    font-family: roboto;
+    font-size: 50px;
+}
+.homeContainer{
+    margin-top: 1%;
+}

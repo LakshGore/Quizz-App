@@ -1,0 +1,369 @@
+<div class="questionContainer">
+  <div class="">
+    <p-panel>
+      <div class="adminHeader">
+        <span *ngIf="!flagToView">
+          <button
+            pButton
+            pRipple
+            type="button"
+            label="View Questions"
+            class="p-button-raised p-button-secondary"
+            routerLink="/viewQuestions"
+          ></button>
+        </span>
+        <span *ngIf="flagToView">
+          <button
+            pButton
+            pRipple
+            type="button"
+            label="View Form"
+            class="p-button-raised p-button-secondary"
+            (click)="viewForm()"
+          ></button>
+        </span>
+        <button
+          pButton
+          pRipple
+          type="button"
+          label="Saved Quizzes"
+          class="p-button-raised p-button-secondary"
+          routerLink="/savedQuiz"
+        ></button>
+      </div>
+    </p-panel>
+  </div>
+  <div class="divQuestionForm" *ngIf="!flagToView">
+    <p-card>
+      <form [formGroup]="questionForm" (ngSubmit)="onSubmit()">
+        <div>
+          <p-dropdown
+            [options]="quizTypes"
+            formControlName="selectedQuiz"
+            optionLabel="name"
+            optionValue="name"
+            placeholder="Select Quiz Type"
+          ></p-dropdown>
+          <span>
+            <span
+              class="spanValid"
+              *ngIf="
+                questionForm.controls['selectedQuiz'].touched &&
+                questionForm.controls['selectedQuiz'].invalid
+              "
+              >Select a Quiz</span
+            ></span
+          >
+        </div>
+
+        <div>
+          <p-dropdown
+            [options]="dropQuestion"
+            formControlName="questionType"
+            optionLabel="name"
+            optionValue="name"
+            placeholder="Select Question Type"
+            (onChange)="checkQuestionType()"
+          ></p-dropdown>
+          <span>
+            <span
+              class="spanValid"
+              *ngIf="
+                questionForm.controls['questionType'].touched &&
+                questionForm.controls['questionType'].invalid
+              "
+              >Select a question Type</span
+            ></span
+          >
+        </div>
+
+        <!-- <p-menu
+          [showTransitionOptions]="'100ms'"
+          [hideTransitionOptions]="'100ms'"
+          #selectedQuiz
+          [popup]="true"
+          [model]="items"
+          (click)="selectQuiz(selectedQuiz)"
+          ></p-menu>
+  
+        <button pButton class="btnSelectQuiz">
+          <i class="pi pi-angle-down" (click)="selectedQuiz.toggle($event)"
+          >Select Quiz type</i
+          >
+        </button>
+        <p-menu
+        [showTransitionOptions]="'100ms'"
+        [hideTransitionOptions]="'100ms'"
+        #questionType
+        [popup]="true"
+        [model]="items"
+        (click)="selectQueType(questionType)"
+        ></p-menu>
+        
+        <button pButton class="btnSelectQuiz">
+          <i class="pi pi-angle-down" (click)="questionType.toggle($event)"
+            >Select Question type</i
+            >
+          </button> -->
+
+        <div>
+          <h3>
+            <label>Enter Your question</label>
+          </h3>
+          <textarea
+            [rows]="3"
+            [cols]="88"
+            pInputTextarea
+            autoResize="autoResize"
+            formControlName="questionText"
+          ></textarea>
+          <span
+            class="spanValid"
+            *ngIf="
+              questionForm.controls['questionText'].touched &&
+              questionForm.controls['questionText'].invalid
+            "
+            >Enter valid Question</span
+          >
+        </div>
+        <h3>Set options</h3>
+        <!-- ****************** For MCQ options ********************* -->
+        <div *ngIf="flagMcq">
+          <div class="mcqOptionsDiv">
+            <div class="mcqOption">
+              <label class="mcqLabels" id="option1">Option1 : </label>
+              <input
+                type="text"
+                pInputText
+                class="p-inputtext-sm"
+                formControlName="option1Text"
+              />
+              <span>
+                <span
+                  class="spanValid"
+                  *ngIf="
+                    questionForm.controls['option1Text'].touched &&
+                    questionForm.controls['option1Text'].invalid
+                  "
+                  >Enter valid option 1</span
+                ></span
+              >
+            </div>
+            <div class="mcqOption">
+              <label class="mcqLabels">Option2 : </label>
+              <input
+                type="text"
+                pInputText
+                class="p-inputtext-sm"
+                formControlName="option2Text"
+              />
+              <span>
+                <span
+                  class="spanValid"
+                  *ngIf="
+                    questionForm.controls['option2Text'].touched &&
+                    questionForm.controls['option2Text'].invalid
+                  "
+                  >Enter valid option 2</span
+                ></span
+              >
+            </div>
+            <div class="mcqOption">
+              <label class="mcqLabels">Option3 : </label>
+              <input
+                type="text"
+                pInputText
+                class="p-inputtext-sm"
+                formControlName="option3Text"
+              />
+              <span>
+                <span
+                  class="spanValid"
+                  *ngIf="
+                    questionForm.controls['option3Text'].touched &&
+                    questionForm.controls['option3Text'].invalid
+                  "
+                  >Enter valid option 3</span
+                ></span
+              >
+            </div>
+            <div class="mcqOption">
+              <label class="mcqLabels">Option4 : </label>
+              <input
+                type="text"
+                pInputText
+                class="p-inputtext-sm"
+                formControlName="option4Text"
+              />
+              <span>
+                <span
+                  class="spanValid"
+                  *ngIf="
+                    questionForm.controls['option4Text'].touched &&
+                    questionForm.controls['option4Text'].invalid
+                  "
+                  >Enter valid option 4</span
+                ></span
+              >
+            </div>
+            <div class="mcqOption">
+              <label class="mcqLabels">Answer : </label>
+              <input
+                type="text"
+                pInputText
+                class="p-inputtext-sm"
+                formControlName="answerText"
+              />
+              <span>
+                <span
+                  class="spanValid"
+                  *ngIf="
+                    questionForm.controls['answerText'].touched &&
+                    questionForm.controls['answerText'].invalid
+                  "
+                  >Enter valid Answer</span
+                ></span
+              >
+            </div>
+
+            <div class="btns">
+              <button
+                [disabled]="!questionForm.valid"
+                pButton
+                pRipple
+                type="submit"
+                label="Submit"
+                class="p-button-raised p-button-success"
+              ></button>
+
+              <button
+                pButton
+                pRipple
+                type="reset"
+                label="Reset"
+                class="p-button-raised p-button-warning"
+              ></button>
+            </div>
+          </div>
+        </div>
+
+        <!--  ***************** For Boolean type *****************-->
+
+        <div *ngIf="flagBoolean">
+          <div class="radioBtns">
+            <p-radioButton
+              name="booleanAns"
+              value="True"
+              formControlName="booleanAns"
+              label="True"
+              class="radioBtn"
+            ></p-radioButton>
+
+            <p-radioButton
+              name="booleanAns"
+              value="False"
+              formControlName="booleanAns"
+              label="False"
+              class="radioBtn"
+            ></p-radioButton>
+          </div>
+          <div class="mcqOption">
+            <label class="mcqLabels">Answer : </label>
+            <input
+              type="text"
+              pInputText
+              class="p-inputtext-sm"
+              formControlName="answerRadio"
+            />
+          </div>
+          <div class="btns">
+            <button
+              pButton
+              pRipple
+              type="submit"
+              label="Submit"
+              class="p-button-raised p-button-success"
+            ></button>
+            <button
+              pButton
+              pRipple
+              type="reset"
+              label="Reset"
+              class="p-button-raised p-button-warning"
+            ></button>
+          </div>
+        </div>
+
+        <!--  ******************** Multi Answer ******************-->
+
+        <div *ngIf="flagmulti">
+          <div class="mcqOptionsDiv">
+            <div class="mcqOption">
+              <label class="mcqLabels">Option1 : </label>
+              <input
+                type="text"
+                pInputText
+                class="p-inputtext-sm"
+                formControlName="multiOption1"
+              />
+            </div>
+            <div class="mcqOption">
+              <label class="mcqLabels">Option2 : </label>
+              <input
+                type="text"
+                pInputText
+                class="p-inputtext-sm"
+                formControlName="multiOption2"
+              />
+            </div>
+            <div class="mcqOption">
+              <label class="mcqLabels">Option3 : </label>
+              <input
+                type="text"
+                pInputText
+                class="p-inputtext-sm"
+                formControlName="multiOption3"
+              />
+            </div>
+            <div class="mcqOption">
+              <label class="mcqLabels">Option4 : </label>
+              <input
+                type="text"
+                pInputText
+                class="p-inputtext-sm"
+                formControlName="multiOption4"
+              />
+            </div>
+            <div class="mcqOption">
+              <label class="mcqLabels">Answer : </label>
+              <input
+                type="text"
+                pInputText
+                class="p-inputtext-sm"
+                formControlName="multiAnswerText"
+              />
+            </div>
+
+            <div class="btns">
+              <button
+                pButton
+                pRipple
+                type="submit"
+                label="Submit"
+                class="p-button-raised p-button-success"
+              ></button>
+
+              <button
+                pButton
+                pRipple
+                type="reset"
+                label="Reset"
+                class="p-button-raised p-button-warning"
+              ></button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </p-card>
+  </div>
+</div>

@@ -1,0 +1,331 @@
+<div class="createQzCont">
+  <p-panel>
+    <div class="adminHeader">
+      <!-- <p-dropdown
+        styleClass="quizDrop"
+        [options]="quizTypes"
+        [(ngModel)]="selectedQuiz"
+        optionLabel="name"
+        optionValue="name"
+        placeholder="Create Quiz"
+        (onChange)="selectQuizType()"
+      ></p-dropdown> -->
+
+      <button
+        pButton
+        pRipple
+        type="button"
+        label="Saved Quizzes"
+        class="p-button-raised p-button-secondary"
+        routerLink="/savedQuiz"
+      ></button>
+      <button
+        pButton
+        pRipple
+        type="button"
+        label="test"
+        class="p-button-raised p-button-secondary"
+        (click)="test()"
+      ></button>
+    </div>
+    <br />
+    <br />
+  </p-panel>
+  <!-- 
+  <div class="questionTypes">
+    <button
+      pButton
+      pRipple
+      type="button"
+      label="Maths"
+      class="p-button-raised p-button-secondary p-button-text"
+      (click)="javaQuiz()"
+    ></button>
+    <button
+      pButton
+      pRipple
+      type="button"
+      label="Java"
+      class="p-button-raised p-button-secondary p-button-text"
+    ></button
+    ><button
+      pButton
+      pRipple
+      type="button"
+      label="Angular"
+      class="p-button-raised p-button-secondary p-button-text"
+    ></button>
+  </div> -->
+  <div class="divQuestionList" *ngIf="!flagToView">
+    <div>
+      <p-card>
+        <div>
+          <h3>Select Question which you want to add to this quiz</h3>
+
+          <!-- <p-dropdown
+            [options]="quizzes"
+            [(ngModel)]="selectedQuiz"
+            optionLabel="name"
+          ></p-dropdown> -->
+
+          <button
+            [disabled]="idAllQue"
+            pButton
+            pRipple
+            type="button"
+            label="All Questions"
+            class="p-button-outlined p-button-secondary"
+            (click)="allQuestions()"
+          ></button>
+          <button
+            [disabled]="isDisabledAddToQuiz"
+            pButton
+            pRipple
+            type="button"
+            label="Add to quiz"
+            class="p-button-outlined p-button-secondary"
+            (click)="addToQuiz()"
+          ></button>
+          <button
+            pButton
+            pRipple
+            type="button"
+            label="View Quiz"
+            class="p-button-outlined p-button-secondary"
+            (click)="viewQuiz()"
+          ></button>
+        </div>
+        <!-- 
+    <ul
+      class="questionList"
+      *ngFor="let question of arrAllQuestions; let checkIndex = index"
+    >
+      <p-checkbox
+        [(ngModel)]="question.isChecked"
+        name="question{{ checkIndex }}"
+        value="question{{ question }}"
+        (click)="checkBox(checkIndex, question)"
+      ></p-checkbox>
+
+      <li class="listQuestions">Quiz Type : {{ question.selectedQuiz.name }}</li>
+      <li class="listQuestions">Question Type : {{ question.questionType.name }}</li>
+      <li class="listQuestions">Question : {{ question.questionText }}</li>
+      <li class="listQuestions">Option 1: {{ question.option1Text }}</li>
+      <li class="listQuestions">Option 2: {{ question.option2Text }}</li>
+      <li class="listQuestions">Option 3: {{ question.option3Text }}</li>
+      <li class="listQuestions">Option 4: {{ question.option4Text }}</li>
+      <li class="listQuestions">Answer: {{ question.answerText }}</li>
+    </ul> -->
+        <!-- <div class="btnsQuizTypes">
+          <button
+            pButton
+            pRipple
+            type="button"
+            label="View Quiz"
+            class="p-button-outlined p-button-primary"
+            
+          ></button
+          ><button
+            pButton
+            pRipple
+            type="button"
+            label="View Quiz"
+            class="p-button-outlined p-button-primary"
+            
+          ></button>
+        </div> -->
+      </p-card>
+    </div>
+    <div class="mcqTableQuestions" *ngIf="isMcqType">
+      <p-table
+        #dt1
+        [value]="arrMcqQuestions"
+        dataKey="id"
+        responsiveLayout="scroll"
+        [globalFilterFields]="['selectedQuiz', 'questionType']"
+      >
+        <!-- <ng-template pTemplate="caption">
+          <div class="flex">
+            <button
+              pButton
+              label="Clear"
+              class="p-button-outlined"
+              icon="pi pi-filter-slash"
+            ></button>
+            <span class="p-input-icon-left ml-auto">
+              <i class="pi pi-search"></i>
+              <input
+                pInputText
+                type="text"
+                (input)="dt1.filterGlobal(inputElem.value, 'contains')"
+                placeholder="Search keyword"
+                #inputElem
+              />
+            </span>
+          
+          </div>
+        </ng-template> -->
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Select</th>
+            <th>Quiz Type</th>
+            <th>Question Type</th>
+            <th>Question ID</th>
+            <th>Question</th>
+            <th>Option 1</th>
+            <th>Option 2</th>
+            <th>Option 3</th>
+            <th>Option 4</th>
+            <th>Answer</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-question>
+          <tr>
+            <td>
+              <p-checkbox
+                [(ngModel)]="question.isChecked"
+                name="question"
+                value="question{{ question }}"
+                (onChange)="selectedQuestions(question, question.isChecked)"
+              ></p-checkbox>
+            </td>
+            <td>{{ question.selectedQuiz }}</td>
+            <td>{{ question.questionType }}</td>
+            <td>{{ question.id }}</td>
+            <td>{{ question.questionText }}</td>
+            <td>{{ question.option1Text }}</td>
+            <td>{{ question.option2Text }}</td>
+            <td>{{ question.option3Text }}</td>
+            <td>{{ question.option4Text }}</td>
+            <td>{{ question.answerText }}</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+    <div class="booleanTableQuestions" *ngIf="isBooleanType">
+      <p-table
+        #dt1
+        [value]="arrBooleanQuestions"
+        dataKey="id"
+        responsiveLayout="scroll"
+        [globalFilterFields]="['selectedQuiz', 'questionType']"
+      >
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Select</th>
+            <th>Quiz Type</th>
+            <th>Question Type</th>
+            <th>Question ID</th>
+            <th>Question</th>
+            <th>Option 1</th>
+            <th>Option 2</th>
+            <th>Answer</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-question>
+          <tr>
+            <td>
+              <p-checkbox
+                [(ngModel)]="question.isChecked"
+                name="question"
+                value="question{{ question }}"
+                (click)="selectedQuestions(question, question.isChecked)"
+              ></p-checkbox>
+            </td>
+            <td>{{ question.selectedQuiz }}</td>
+            <td>{{ question.questionType }}</td>
+            <td>{{ question.id }}</td>
+            <td>{{ question.questionText }}</td>
+            <td>True</td>
+            <td>False</td>
+            <td>{{ question.answerRadio }}</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+    <div class="writtenTableQuestions" *ngIf="isWrittenType">
+      <p-table
+        #dt1
+        [value]="sortedArray"
+        dataKey="id"
+        responsiveLayout="scroll"
+        [globalFilterFields]="['selectedQuiz', 'questionType']"
+      >
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Select</th>
+            <th>Quiz Type</th>
+            <th>Question Type</th>
+            <th>Question</th>
+            <th>Option 1</th>
+            <th>Option 2</th>
+            <th>Option 3</th>
+            <th>Option 4</th>
+            <th>Answer</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-question let-i="rowIndex">
+          <tr>
+            <td>
+              <p-checkbox
+                [(ngModel)]="question.isChecked"
+                (onChange)="selectedQuestions($event, question)"
+                [binary]="true"
+              >
+              </p-checkbox>
+            </td>
+            <td>{{ question.selectedQuiz }}</td>
+            <td>{{ question.questionType }}</td>
+            <td>{{ question.questionText }}</td>
+            <td>{{ question.option1Text }}</td>
+            <td>{{ question.option2Text }}</td>
+            <td>{{ question.option3Text }}</td>
+            <td>{{ question.option4Text }}</td>
+            <td>{{ question.answerText }}</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+  <div class="divQuestionList" *ngIf="flagToView">
+    <div>
+      <h3>You have created this quiz</h3>
+
+      <button
+        pButton
+        pRipple
+        type="button"
+        label="Save quiz"
+        class="p-button-raised p-button-secondary p-button-text"
+        (click)="addQuizToDB()"
+      ></button>
+      <button
+        pButton
+        pRipple
+        type="button"
+        label="Go Back"
+        class="p-button-raised p-button-secondary p-button-text"
+        (click)="goBack()"
+      ></button>
+      <ul
+        class="questionList"
+        *ngFor="let question of newQuiz; let checkIndex = index"
+      >
+        <p-card>
+          <b>
+            <li class="listQuestions">
+              Question {{ checkIndex + 1 }}: {{ question.questionText }}
+            </li></b
+          >
+          <li class="listQuestions">Option 1: {{ question.option1Text }}</li>
+          <li class="listQuestions">Option 2: {{ question.option2Text }}</li>
+          <li class="listQuestions">Option 3: {{ question.option3Text }}</li>
+          <li class="listQuestions">Option 4: {{ question.option4Text }}</li>
+          <b>
+            <li class="listQuestions">Answer: {{ question.answerText }}</li></b
+          ></p-card
+        >
+      </ul>
+    </div>
+  </div>
+</div>

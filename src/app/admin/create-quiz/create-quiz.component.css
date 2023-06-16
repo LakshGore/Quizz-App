@@ -1,0 +1,45 @@
+.createQzCont{
+  margin-top: 1%;
+}
+.adminHeader{
+  float: right;
+  margin-top: 1%;
+  width: 100%;
+}
+.p-button{
+  width: 15%;
+}
+button + button {
+  margin-left: 20px;
+}
+.divQuestionList{
+  margin-top: 1%;
+  font-family:'Lucida Sans';
+}
+.questionTableRows {
+  margin-top: 10px;
+}
+.listQuestions{
+  list-style: none;
+  font-family:Arial;
+  margin-top: 2px;
+}
+p-dropdown + button{
+  margin-left: 20px;    
+}
+
+:host ::ng-deep.quizDrop{
+  background-color: #adbdcc;
+  color: white;
+  width: 15%;
+}
+:host ::ng-deep.p-dropdown:hover{
+  background-color: #bfc5ca;
+  
+}
+.divTableQuestions{
+  margin-top: 1%;
+}
+div + .btnsQuizTypes{
+  margin-top: 20px;
+}

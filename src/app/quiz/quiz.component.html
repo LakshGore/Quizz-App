@@ -1,0 +1,263 @@
+<div class="quizContainer">
+  <div class="headQuiz">
+    <p-panel>
+      <div class="btnsHead">
+        <button
+          [disabled]="isQuizStarted"
+          pButton
+          pRipple
+          type="button"
+          label="Start Quiz"
+          class="p-button-raised p-button-secondary"
+          (click)="startQuiz()"
+        ></button>
+        <button
+          [disabled]="isQuizStarted"
+          pButton
+          pRipple
+          type="button"
+          label="Saved Quizzes"
+          class="p-button-raised p-button-secondary"
+          (click)="viewAllQuizzes()"
+        ></button>
+
+        <span *ngIf="isFinished">
+          <h4>Score : {{ points }}/{{ totalPoints }}</h4></span
+        >
+      </div>
+    </p-panel>
+  </div>
+  <div class="main" *ngIf="flagStartQuiz">
+    <div class="questionTab">
+      <!-- *********** navigator next
+         <span>
+        <i
+          class="pi pi-chevron-left"
+          style="font-size: 4rem; ;color: gray;"
+        ></i>
+      </span> -->
+      <p-tabView class="tabview">
+        <p-tabPanel
+          class="quePanel"
+          header="{{ i + 1 }}"
+          *ngFor="let d of dummarr; let i = index"
+        >
+          <p-card class="queCard">
+            <span class="questionNumberTitle">Question {{ i + 1 }}</span> <br />
+            <span class="questionText">{{ arrQuestions[i].questionText }}</span>
+            <br />
+            <br />
+
+            <!-- ************ Answer List => Not working for-loop ************* -->
+            <!-- <div
+              class="listAnswer"
+              *ngFor="let ans of arrQuestions[i].options; let ansIndex = index"
+              (click)="selectedAnswer(i, ans)"
+              >
+              <span
+              *ngIf="answerSubmitted; then answered; else notAnswered"
+              ></span>
+              <ng-template #notAnswered>
+                <i class="pi pi-circle"></i>
+              </ng-template>
+              <ng-template #answered>
+                <span *ngIf="checkAnswer; then correct; else incorrect"></span>
+                <ng-template #correct>
+                  <i class="pi pi-check-circle"></i>
+                </ng-template>
+                  <ng-template #incorrect>
+                    <i class="pi pi-times-circle"></i>
+                  </ng-template> 
+                  <ng-template #correct>
+                    <i [ngClass]="{ correctAnswer: correctAnswer }"></i>
+                    <i class="pi pi-check-circle"></i>
+                  </ng-template>
+                  <ng-template #incorrect>
+                    <i [ngClass]="wrongAnswer"></i>
+                  </ng-template>
+                </ng-template>
+                {{ ans }}
+            </div> -->
+
+            <!-- ******************* Answer List ************** -->
+
+            <div
+              class="listAnswer"
+              (click)="selectedAnswer(i, arrQuestions[i].option1Text)"
+            >
+              <span
+                *ngIf="answerSubmitted; then answered; else notAnswered"
+              ></span>
+              <ng-template #notAnswered>
+                <i class="pi pi-circle"></i>
+              </ng-template>
+              <ng-template #answered>
+                <span *ngIf="isCorrect; then correct; else incorrect"></span>
+                <ng-template #correct>
+                  <i class="pi pi-check-circle"></i>
+                </ng-template>
+                <ng-template #incorrect>
+                  <i class="pi pi-times-circle"></i>
+                </ng-template>
+              </ng-template>
+              {{ arrQuestions[i].option1Text }}
+            </div>
+            <div
+              class="listAnswer"
+              (click)="selectedAnswer(i, arrQuestions[i].option2Text)"
+            >
+              <span
+                *ngIf="answerSubmitted; then answered; else notAnswered"
+              ></span>
+              <ng-template #notAnswered>
+                <i class="pi pi-circle"></i>
+              </ng-template>
+              <ng-template #answered>
+                <span *ngIf="checkAnswer; then correct; else incorrect"></span>
+                <ng-template #correct>
+                  <i class="pi pi-check-circle"></i>
+                </ng-template>
+                <ng-template #incorrect>
+                  <i class="pi pi-times-circle"></i>
+                </ng-template>
+              </ng-template>
+              {{ arrQuestions[i].option2Text }}
+            </div>
+            <div
+              class="listAnswer"
+              (click)="selectedAnswer(i, arrQuestions[i].option3Text)"
+            >
+              <span
+                *ngIf="answerSubmitted; then answered; else notAnswered"
+              ></span>
+              <ng-template #notAnswered>
+                <i class="pi pi-circle"></i>
+              </ng-template>
+              <ng-template #answered>
+                <span *ngIf="checkAnswer; then correct; else incorrect"></span>
+                <ng-template #correct>
+                  <i class="pi pi-check-circle"></i>
+                </ng-template>
+                <ng-template #incorrect>
+                  <i class="pi pi-times-circle"></i>
+                </ng-template>
+              </ng-template>
+              {{ arrQuestions[i].option3Text }}
+            </div>
+            <div
+              class="listAnswer"
+              (click)="selectedAnswer(i, arrQuestions[i].option4Text)"
+            >
+              <span
+                *ngIf="answerSubmitted; then answered; else notAnswered"
+              ></span>
+              <ng-template #notAnswered>
+                <i class="pi pi-circle"></i>
+              </ng-template>
+              <ng-template #answered>
+                <span *ngIf="checkAnswer; then correct; else incorrect"></span>
+                <ng-template #correct>
+                  <i class="pi pi-check-circle"></i>
+                </ng-template>
+                <ng-template #incorrect>
+                  <i class="pi pi-times-circle"></i>
+                </ng-template>
+              </ng-template>
+              {{ arrQuestions[i].option4Text }}
+            </div>
+            <!-- <div class="listAnswer" style="height: 50px; border: none">
+              <button
+                pButton
+                pRipple
+                type="button"
+                label="Submit Answer"
+                class="p-button-raised p-button-success"
+                (click)="selectedAnswer(i, arrQuestions[i].option4Text)"
+              ></button>
+             
+            </div> -->
+
+            <!-- *****************Answer List By formGroup ***************** -->
+
+            <!-- <form [formGroup]="answerForm">
+              <div>
+                <input type="radio" formControlName="option1" (click)="formSelectAnswer()">Option 1
+              </div>
+              <div>
+                <input type="radio" formControlName="option2" (click)="formSelectAnswer()">Option 2
+              </div>
+              <div>
+                <input type="radio" formControlName="option3" (click)="formSelectAnswer()">Option 3
+              </div>
+              <div>
+                <input type="radio" formControlName="option4" (click)="formSelectAnswer()"
+                >Option 4
+              </div>
+            </form> -->
+          </p-card>
+          <div class="nextPrevBtns">
+            <p-card>
+              <span> <i class="pi pi-chevron-left"></i><i>Previous </i></span>
+              <span> <i>Next</i> <i class="pi pi-chevron-right"></i></span>
+            </p-card>
+          </div>
+        </p-tabPanel>
+      </p-tabView>
+      <!-- <span>    ************ navigator previous ***********
+        <i
+          class="pi pi-chevron-right"
+          style="font-size: 4rem; color: gray;;"
+          ></i>
+        </span> -->
+    </div>
+    <!-- ********** for prev and next options ************
+          <div class="dummytab">
+            <p-button icon="pi pi-chevron-up" (click)="openPrev()"></p-button>
+            <p-button icon="pi pi-chevron-down" (click)="openNext()"></p-button>
+            
+            <p-tabView [(activeIndex)]="index" class="tabview">
+              <p-tabPanel header="Header 1"> Content 1 </p-tabPanel>
+              <p-tabPanel header="Header 2"> Content 2 </p-tabPanel>
+              <p-tabPanel header="Header 3"> Content 3 </p-tabPanel>
+            </p-tabView>
+          </div> -->
+
+    <!-- ************* Online Result -->
+    <!-- <div>
+            <p-card>
+              <div *ngIf="flagAnswer">
+                <span *ngIf="isCorrect">
+                  <h3 style="color: green">
+                    Your answer is correct
+                  </h3>
+                </span>
+                <span *ngIf="!isCorrect">
+                  <h3 style="color: rgb(250, 12, 12)">
+                    Your answer is not correct
+                  </h3>
+                </span>
+              </div>
+            </p-card>
+          </div> -->
+  </div>
+  <div class="quizList" *ngIf="!flagStartQuiz">
+    <p-card>
+      <p-table [value]="viewArrQuiz" responsiveLayout="scroll" #dt>
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Index</th>
+            <th>Quiz Code</th>
+            <th>Quiz Data</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-quiz let-index="rowIndex">
+          <tr>
+            <td>{{ index + 1 }}</td>
+            <td>{{ quiz.id }}</td>
+            <td>click here</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </p-card>
+  </div>
+</div>

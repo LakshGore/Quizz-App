@@ -1,0 +1,33 @@
+.headerPanel {
+  margin-left: 50px;
+}
+.divHeaderMenu {
+  background-color: antiquewhite;
+  
+}
+.ulHeaderMenuItems {
+  background-color: rgb(242, 243, 243);
+  height: 50px;
+  padding: 10px 10px 10px 10px;
+  text-align: right;
+  padding-right: 20%;
+}
+.liHeaderMenu {
+  list-style: none;
+  color: #0e94bd;
+  padding: 2px 2px 2px 2px;
+  display: inline;
+  margin-left: 5px;
+}
+.quizButton {
+  background: transparent;
+  color: #0e94bd;
+  border: none;
+}
+.quizButton:hover {
+  background-color: #46aac9;
+}
+.homeText {
+    display: inline;
+    float: left;
+}

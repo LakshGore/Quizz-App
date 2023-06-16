@@ -1,0 +1,241 @@
+<div class="quizContainer">
+  <!-- *************  no need => remove later -->
+  <!-- <div class="headQuiz">
+    <p-panel>
+      <div class="btnsHead">
+        <button
+          [disabled]="isQuizStarted"
+          pButton
+          pRipple
+          type="button"
+          label="Start Quiz"
+          class="p-button-raised p-button-secondary"
+          (click)="startQuiz()"
+        ></button>
+        <button
+          [disabled]="isQuizStarted"
+          pButton
+          pRipple
+          type="button"
+          label="Saved Quizzes"
+          class="p-button-raised p-button-secondary"
+          (click)="viewAllQuizzes()"
+        ></button>
+
+        <span *ngIf="isFinished">
+          <h4>Score : {{ points }}/{{ totalPoints }}</h4></span
+        >
+      </div>
+    </p-panel>
+  </div> -->
+  <div *ngIf="!isDone">
+    <div class="main" *ngIf="flagStartQuiz">
+      <div *ngIf="!isFinished">
+        <p-card>
+          <h1>Active Question : {{ activeQuestion + 1 }}</h1>
+          <p-card>
+            <div *ngIf="arrQuestions[activeQuestion].questionType == 'MCQ'">
+              <h2>Question :</h2>
+              <h4>{{ arrQuestions[activeQuestion].questionText }}</h4>
+              <div class="answerBox">
+                <p-radioButton
+                  name="groupname{{ activeQuestion }}"
+                  value="{{ arrQuestions[activeQuestion].option1Text }}"
+                  [(ngModel)]="selectedValue"
+                  (onClick)="selectAnswer()"
+                ></p-radioButton>
+                {{ arrQuestions[activeQuestion].option1Text }}
+              </div>
+              <div class="answerBox">
+                <p-radioButton
+                  name="groupname{{ activeQuestion }}"
+                  value="{{ arrQuestions[activeQuestion].option2Text }}"
+                  [(ngModel)]="selectedValue"
+                  (onClick)="selectAnswer()"
+                ></p-radioButton>
+                {{ arrQuestions[activeQuestion].option2Text }}
+              </div>
+              <div class="answerBox">
+                <p-radioButton
+                  name="groupname{{ activeQuestion }}"
+                  value="{{ arrQuestions[activeQuestion].option3Text }}"
+                  [(ngModel)]="selectedValue"
+                  (onClick)="selectAnswer()"
+                ></p-radioButton>
+                {{ arrQuestions[activeQuestion].option3Text }}
+              </div>
+              <div class="answerBox">
+                <p-radioButton
+                  name="groupname{{ activeQuestion }}"
+                  value="{{ arrQuestions[activeQuestion].option4Text }}"
+                  [(ngModel)]="selectedValue"
+                  (onClick)="selectAnswer()"
+                ></p-radioButton>
+                {{ arrQuestions[activeQuestion].option4Text }}
+              </div>
+              <div class="answerBox" style="border: none">
+                <button
+                  [disabled]="!submitted"
+                  pButton
+                  pRipple
+                  type="button"
+                  label="Submit"
+                  class="p-button-raised p-button-secondary"
+                  (click)="submitAnswer(activeQuestion, selectedValue)"
+                ></button>
+              </div>
+            </div>
+            <div *ngIf="arrQuestions[activeQuestion].questionType == 'Boolean'">
+              <h2>Question :</h2>
+              <h4>{{ arrQuestions[activeQuestion].questionText }}</h4>
+              <div class="answerBox">
+                <p-radioButton
+                  name="groupname{{ activeQuestion }}"
+                  value="True"
+                  [(ngModel)]="selectedValue"
+                  (onClick)="selectAnswer()"
+                ></p-radioButton>
+                True
+              </div>
+              <div class="answerBox">
+                <p-radioButton
+                  name="groupname{{ activeQuestion }}"
+                  value="False"
+                  [(ngModel)]="selectedValue"
+                  (onClick)="selectAnswer()"
+                ></p-radioButton>
+                False
+              </div>
+
+              <div class="answerBox" style="border: none">
+                <button
+                  [disabled]="!submitted"
+                  pButton
+                  pRipple
+                  type="button"
+                  label="Submit"
+                  class="p-button-raised p-button-secondary"
+                  (click)="submitAnswer(activeQuestion, selectedValue)"
+                ></button>
+              </div>
+            </div>
+            <div class="btnsNextPrev">
+              <!-- <span (click)="prevQuestion()">
+              <i
+                class="pi pi-angle-left"
+                style="font-size: 2rem; color: rgb(19, 121, 134); flex: 0 0"
+              >
+              </i
+              ><b style="color: rgb(19, 121, 134); font-size: 24px"
+                >Prev</b
+              ></span
+            > -->
+              <div style="flex: 1 0 auto; margin-left: 10%">
+                <!-- <span>
+                <button
+                  *ngFor="let len of arrQuestions; let i = index"
+                  pButton
+                  pRipple
+                  type="button"
+                  class="p-button-rounded p-button-secondary p-button-outlined"
+                >
+                  {{ i }}
+                </button>
+              </span> -->
+                <p-paginator
+                  class="custom-paginator"
+                  [rows]="10"
+                  [totalRecords]="100"
+                  (onPageChange)="paginate($event)"
+                ></p-paginator>
+              </div>
+              <!-- <span class="btnNext" (click)="nextQuestion()"
+              ><b style="color: rgb(19, 121, 134); font-size: 24px">Next</b>
+              <i
+                class="pi pi-angle-right"
+                style="font-size: 2rem; color: rgb(19, 121, 134)"
+              ></i
+            ></span> -->
+            </div>
+          </p-card>
+        </p-card>
+      </div>
+      <div *ngIf="isFinished">
+        <p-card>
+          <h1>Do You want to finish ???</h1>
+          <button
+            pButton
+            pRipple
+            type="button"
+            label="Submit"
+            class="p-button-raised p-button-secondary"
+            (click)="finalAnswer()"
+          ></button>
+        </p-card>
+      </div>
+    </div>
+    <div class="quizList" *ngIf="!flagStartQuiz">
+      <p-card>
+        <p-table [value]="viewArrQuiz" responsiveLayout="scroll" #dt>
+          <ng-template pTemplate="header">
+            <tr>
+              <th>Index</th>
+              <th>Quiz Code</th>
+              <th>Quiz Type</th>
+              <th>Action</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-quiz let-index="rowIndex">
+            <tr>
+              <td>{{ index + 1 }}</td>
+              <td>{{ quiz.id }}</td>
+              <td>"click here"</td>
+              <!-- <button
+          [disabled]="isQuizStarted"
+          pButton
+          pRipple
+          type="button"
+          label="Start Quiz"
+          class="p-button-raised p-button-secondary"
+          (click)="startQuiz()"
+        ></button> -->
+              <td>
+                <button
+                  pButton
+                  class="pi pi-sign-in"
+                  type="button"
+                  icon="pi pi-power-off"
+                  label="  Start"
+                  class="p-button-raised p-button-success p-button-text"
+                  (click)="startQuiz()"
+                ></button>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </p-card>
+    </div>
+  </div>
+  <div *ngIf="isDone">
+    <p-card>
+      <h1 style="text-align: center">Finished !!!</h1>
+      <h3 style="text-align: center">
+        You have successfully submitted your quiz !!
+      </h3>
+      <br />
+      <div style="text-align: center">
+        <button
+          routerLink="/user/user"
+          pButton
+          pRipple
+          type="button"
+          label="Check for more"
+          class="p-button-success"
+        ></button>
+        <br />
+        <br />
+        <h3>Go back and check for more quizzes</h3>
+      </div>
+    </p-card>
+  </div>
+</div>

@@ -1,0 +1,168 @@
+{
+  "questions": [
+    {
+      "selectedQuiz": "Java",
+      "questionType": "MCQ",
+      "questionText": "Which of the following option leads to the portability and security of Java?",
+      "option1Text": "Bytecode is executed by JVM",
+      "option2Text": "The applet makes the Java code secure and portable",
+      "option3Text": "Use of exception handling",
+      "option4Text": "Dynamic binding between objects",
+      "answerText": "Bytecode is executed by JVM",
+      "booleanAns": "",
+      "multiOption1": "",
+      "multiOption2": "",
+      "multiOption3": "",
+      "multiOption4": "",
+      "multiAnswerText": "",
+      "answerRadio": "",
+      "id": 2
+    },
+    {
+      "selectedQuiz": "Angular",
+      "questionType": "MCQ",
+      "questionText": "Which of the following statement is correct for AngularJS?",
+      "option1Text": "AngularJS is an HTML framework",
+      "option2Text": "AngularJS is a Java framework",
+      "option3Text": "AngularJS is a JavaScript framework",
+      "option4Text": "AngularJS is a SQL framework",
+      "answerText": "AngularJS is a JavaScript framework",
+      "booleanAns": "",
+      "multiOption1": "",
+      "multiOption2": "",
+      "multiOption3": "",
+      "multiOption4": "",
+      "multiAnswerText": "",
+      "answerRadio": "",
+      "id": 3
+    },
+    {
+      "selectedQuiz": "Angular",
+      "questionType": "MCQ",
+      "questionText": "What does this syntax do? routerLink=\"/crisis-center\"",
+      "option1Text": "It navigates to the component with a name matching the assigned string",
+      "option2Text": "It links a route with data by matching the assigned string to a property name",
+      "option3Text": "It links a route to a service by matching the assigned string to a service class name",
+      "option4Text": "It navigates to the component with a path matching the assigned string",
+      "answerText": "It navigates to the component with a path matching the assigned string",
+      "booleanAns": "",
+      "multiOption1": "",
+      "multiOption2": "",
+      "multiOption3": "",
+      "multiOption4": "",
+      "multiAnswerText": "",
+      "answerRadio": "",
+      "id": 4
+    },
+    {
+      "selectedQuiz": "Maths",
+      "questionType": "Boolean",
+      "questionText": "Queen Elizabeth the 1st was the daughter of King Henry the 8th of England",
+      "option1Text": "",
+      "option2Text": "",
+      "option3Text": "",
+      "option4Text": "",
+      "answerText": "",
+      "booleanAns": "",
+      "multiOption1": "",
+      "multiOption2": "",
+      "multiOption3": "",
+      "multiOption4": "",
+      "multiAnswerText": "",
+      "answerRadio": "True",
+      "id": 5
+    },
+    {
+      "selectedQuiz": "Java",
+      "questionType": "Boolean",
+      "questionText": "java is front end langaue",
+      "option1Text": "",
+      "option2Text": "",
+      "option3Text": "",
+      "option4Text": "",
+      "answerText": "",
+      "booleanAns": "True",
+      "multiOption1": "",
+      "multiOption2": "",
+      "multiOption3": "",
+      "multiOption4": "",
+      "multiAnswerText": "",
+      "answerRadio": "False",
+      "id": 6
+    },
+    {
+      "selectedQuiz": "Angular",
+      "questionType": "Boolean",
+      "questionText": "angular is scripting langauge",
+      "option1Text": "",
+      "option2Text": "",
+      "option3Text": "",
+      "option4Text": "",
+      "answerText": "",
+      "booleanAns": "",
+      "multiOption1": "",
+      "multiOption2": "",
+      "multiOption3": "",
+      "multiOption4": "",
+      "multiAnswerText": "",
+      "answerRadio": "True",
+      "id": 7
+    }
+  ],
+  "Quizes": [
+    [
+      {
+        "questionId": 2,
+        "quizType": "Java",
+        "questionType": "MCQ"
+      },
+      {
+        "questionId": 3,
+        "quizType": "Angular",
+        "questionType": "MCQ"
+      },
+      {
+        "questionId": 5,
+        "quizType": "Maths",
+        "questionType": "Boolean"
+      },
+      {
+        "questionId": 6,
+        "quizType": "Java",
+        "questionType": "Boolean"
+      }
+    ]
+  ],
+  "Results": [
+    {
+      "user": "laxman",
+      "data": [
+        {
+          "question": 2,
+          "answer": "Dynamic binding between objects"
+        },
+        {
+          "question": 3,
+          "answer": "AngularJS is a SQL framework"
+        },
+        {
+          "question": 4,
+          "answer": "It navigates to the component with a path matching the assigned string"
+        },
+        {
+          "question": 5,
+          "answer": "False"
+        },
+        {
+          "question": 6,
+          "answer": "False"
+        },
+        {
+          "question": 7,
+          "answer": "False"
+        }
+      ],
+      "id": 1
+    }
+  ]
+}

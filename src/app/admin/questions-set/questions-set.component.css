@@ -1,0 +1,74 @@
+.questionContainer {
+  margin-top: 1%;
+}
+
+.adminHeader {
+  margin-top: 1%;
+}
+.divQuestionForm {
+  margin-left: 0;
+  padding-left: 10%;
+}
+.fieldset {
+  margin-top: 50px;
+}
+:host ::ng-deep.p-dropdown-quiz {
+  background: transparent;
+  color: #0e94bd;
+  border: none;
+}
+.btnSelectQuiz:hover {
+  background-color: #46aac9;
+}
+.pi-sort-numeric-up-alt {
+  color: #0e94bd;
+}
+div + div {
+  margin-top: 15px;
+}
+:host ::ng-deep.p-dropdown {
+  width: 30%;
+  background: transparent;
+  color: #0e94bd;
+}
+:host ::ng-deep.p-dropdown:hover {
+  background-color: #86d3eb;
+}
+.mcqLabels {
+  width: 30%;
+}
+.mcqOption {
+  width: 80%;
+}
+.btns {
+  width: 50%;
+  margin-left: 20%;
+}
+button + button {
+  margin-left: 40px;
+}
+span + button {
+  margin-left: 40px;
+}
+
+.p-inputtext-sm {
+  width: 40%;
+}
+.spanValid {
+  color: red;
+  width: 25%;
+  margin-left: 25px;
+  display: inline-block;
+}
+.mcqOption {
+  flex-direction: row;
+}
+button {
+  width: 150px;
+}
+.p-radiobutton + .p-radiobutton {
+  margin-left: 30px;
+}
+.radioBtn{
+  margin-left: 30px;
+}

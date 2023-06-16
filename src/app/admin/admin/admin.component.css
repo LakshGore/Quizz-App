@@ -1,0 +1,30 @@
+.adminHeader{
+    float: right;
+    width: 100%;
+    margin-top: 1%;
+}
+button{
+    width: 14%;
+}
+p-dropdown + button{
+    margin-left: 20px;    
+}
+button + button{
+    margin-left: 20px;
+}
+.btnsDiv{
+    
+    margin-top: 1%;
+}
+:host ::ng-deep.quizDrop{
+    background-color: #adbdcc;
+    color: white;
+}
+:host ::ng-deep.p-dropdown:hover{
+    background-color: #bfc5ca;
+    
+}
+.quizList{
+    margin-top: 1%;
+}
+

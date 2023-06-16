@@ -1,0 +1,88 @@
+.quizContainer{
+  width: 100%;
+  margin-top: 1%;
+}
+.headQuiz{
+  width: 100%;
+  
+}
+.btnsHead{
+  text-align: left;  
+  
+}
+.quizList{
+  margin-top: 1%;
+}
+
+.main {
+  width: 100%;
+  margin-left: 2%;
+  margin-top: 1%;
+}
+.questionTab{
+  width: 90%;
+  
+}
+.headPanel {
+  width: 50%;
+}
+.queCard {
+  font-family: "Segoe UI";
+  font-weight: bold;
+  font-size: 18px;
+}
+.questionNumberTitle {
+  font-family: "Segoe UI";
+  font-weight: bold;
+  font-size: 24px;
+}
+.questionText {
+  font-family: "Segoe UI";
+  font-weight: bold;
+  font-size: 18px;
+}
+.pi-check-circle {
+  color: green;
+}
+.listAnswer {
+  width: 100%;
+  list-style: none;
+  border: 1px solid rgb(224, 222, 222);
+  margin-top: 20px;
+  color: rgb(77, 76, 76);
+  font-family: "Segoe UI";
+  font-weight: bold;
+  font-size: 18px;
+  height: 40px;
+  padding: 4px 4px 4px 4px;
+}
+.answerbox {
+    justify-content: space-between;
+  flex-wrap: wrap;
+  width: 80%;
+  clear: both;
+  display: flex;
+}
+.correctAnswer{
+  background-color: green;
+  color: aqua;
+}
+p {
+  font-family: "Segoe UI";
+  font-weight: bold;
+  font-size: 18px;
+}
+button + button {
+  margin-left: 20px;
+}
+button + span {
+  margin-left: 30px;
+ 
+}
+.quePanel{
+  margin-top: 1%;
+}
+.nextPrevBtns{
+  margin-top: 1%;
+  font-size: 20px;
+}
